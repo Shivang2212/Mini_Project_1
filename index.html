@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Destination | Smart, Safe & Sustainable Tourism in India</title>
+    
+    <!-- Meta tags for SEO & Academic Project details -->
+    <meta name="description" content="Dream Destination is a smart tourism platform promoting sustainable travel, verified homestays, local artisan empowerment, and AI-assisted trip planning across India.">
+    <meta name="keywords" content="Indian Tourism, Sustainable Travel, Smart Trip Planner, Offbeat Destinations, Homestays, Cultural Tourism">
+    
+    <!-- Google Fonts (Poppins) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Leaflet.js Interactive Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <!-- Master Modular Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= TOP NAVIGATION ================= -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="showPage('homePage')">
+                <div class="logo-badge"><i class="fas fa-mountain-sun"></i></div>
+                <div class="logo-text">
+                    <div class="brand-name">Dream<span>Destination</span></div>
+                    <div class="brand-tag">BHARAT 🇮🇳</div>
+                </div>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#homePage" data-target="homePage" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#planner" data-target="planner"><i class="fas fa-brain"></i> Planner</a></li>
+                <li><a href="#destinations" data-target="destinations"><i class="fas fa-compass"></i> Destinations</a></li>
+                <li><a href="#map" data-target="map"><i class="fas fa-map-marked-alt"></i> Dream Map</a></li>
+                <li><a href="#listings" data-target="listings"><i class="fas fa-hotel"></i> Homestays</a></li>
+                <li><a href="#marketplace" data-target="marketplace"><i class="fas fa-hands-helping"></i> Artisan Hub</a></li>
+                <li><a href="#guides" data-target="guides"><i class="fas fa-user-tie"></i> Guides</a></li>
+                <li><a href="#culture" data-target="culture"><i class="fas fa-theater-masks"></i> Culture</a></li>
+                <li><a href="#reviews" data-target="reviews"><i class="fas fa-star"></i> Reviews</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <div class="saved-pill" id="savedPill" onclick="showSavedModal()" title="View Saved Trips & Favorites">
+                    <i class="fas fa-heart"></i> <span class="saved-label">Saved</span> <span class="badge-count" id="savedCount">0</span>
+                </div>
+                <div id="navAuthContainer">
+                    <!-- Populated dynamically by updateNavAuth() -->
+                </div>
+                <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= MAIN CONTENT CONTAINER ================= -->
+    <main>
+
+        <!-- 1. HOME SECTION -->
+        <section id="homePage">
+            <!-- Hero -->
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-pill">
+                        <span class="pulse-indicator"></span>
+                        <span>Promoting Smart, Safe & Sustainable Tourism in India 🇮🇳</span>
+                    </div>
+                    <h1>नमस्ते भारत | <span>Namaste Bharat</span></h1>
+                    <p>Plan authentic, budget-conscious journeys that directly empower rural artisans, support certified local guides, and preserve India's timeless cultural heritage.</p>
+                    
+                    <div class="hero-buttons">
+                        <button class="btn btn-secondary btn-lg" onclick="showPage('planner')">
+                            <i class="fas fa-route"></i> Plan Smart Trip
+                        </button>
+                        <button class="btn btn-glass btn-lg" onclick="showPage('map')">
+                            <i class="fas fa-map-marked-alt"></i> Explore Live Map
+                        </button>
+                        <button class="btn btn-glass btn-lg" onclick="showPage('authPage')">
+                            <i class="fas fa-user-plus"></i> Join Community
+                        </button>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-icon"><i class="fas fa-gem"></i></div>
+                            <h3>10+</h3>
+                            <p>Offbeat Indian Gems</p>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h3>100%</h3>
+                            <p>Verified Homestays</p>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                            <h3>Direct</h3>
+                            <p>Artisan Revenue</p>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-icon"><i class="fas fa-percent"></i></div>
+                            <h3>0%</h3>
+                            <p>Commercial Middlemen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vision & Mission -->
+            <div class="vision">
+                <div class="container">
+                    <div class="vision-grid">
+                        <div class="vision-text">
+                            <span class="tagline">Our Philosophy</span>
+                            <h2>हमारी यात्रा | Hamari Yatra</h2>
+                            <p>Mass commercial tourism often congests traditional destinations and diverts money into large multinational corporations. <strong>Dream Destination</strong> reimagines Indian travel as a tool for sustainable grassroots growth.</p>
+                            <p>Every homestay booked, workshop attended, and guide hired directly injects income into local families. We combine modern computer science algorithms with cultural stewardship so you travel smarter, safer, and with deep respect for Indian traditions.</p>
+                            <button class="btn btn-primary" onclick="showPage('culture')">
+                                <i class="fas fa-book-open"></i> Read Cultural Etiquette Guide
+                            </button>
+                        </div>
+
+                        <div class="pillar-cards">
+                            <div class="pillar-card">
+                                <div class="icon">🧠</div>
+                                <h4>Smart Budget Planning</h4>
+                                <p>Algorithmic itinerary generator allocating 100% transparent daily expenses for stay, food, and culture.</p>
+                            </div>
+                            <div class="pillar-card">
+                                <div class="icon">🛡️</div>
+                                <h4>Verified & Safe</h4>
+                                <p>Manual verification for rural homestays and govt-certified credentials for all local guides.</p>
+                            </div>
+                            <div class="pillar-card">
+                                <div class="icon">🎨</div>
+                                <h4>Artisan Empowerment</h4>
+                                <p>Book direct workshops in Madhubani painting, blue pottery, and pashmina weaving.</p>
+                            </div>
+                            <div class="pillar-card">
+                                <div class="icon">🌱</div>
+                                <h4>Zero-Waste Tourism</h4>
+                                <p>Actionable eco-tips, plastic avoidance, and conservation charters for fragile Himalayan and tribal ecosystems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SMART TRIP PLANNER SECTION -->
+        <section id="planner" class="page-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="tagline">AI-Assisted Engine</span>
+                    <h2>🧠 Smart Trip Planner</h2>
+                    <p>Generate a customized, eco-friendly travel itinerary with balanced rest times, authentic local spots, and intelligent budget allocation.</p>
+                </div>
+
+                <div class="planner-wrapper">
+                    <div class="planner-card">
+                        <h3 style="margin-bottom: 1.25rem;"><i class="fas fa-sliders-h"></i> Trip Parameters</h3>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Where to? (Destination)</label>
+                            <input type="text" id="destinationInput" placeholder="e.g. Chitkul, Hampi, Jaipur, Spiti">
+                            <div class="quick-dest-pills">
+                                <span onclick="setQuickDest('Chitkul')">Chitkul</span>
+                                <span onclick="setQuickDest('Hampi')">Hampi</span>
+                                <span onclick="setQuickDest('Spiti Valley')">Spiti</span>
+                                <span onclick="setQuickDest('Majuli Island')">Majuli</span>
+                                <span onclick="setQuickDest('Ziro Valley')">Ziro</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="far fa-calendar-alt"></i> Trip Duration (Days)</label>
+                            <input type="number" id="daysInput" value="3" min="1" max="15">
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-rupee-sign"></i> Total Budget (₹ INR)</label>
+                            <input type="number" id="budgetInput" value="12000" min="2000" step="500">
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-theater-masks"></i> Travel Mood</label>
+                            <select id="moodInput">
+                                <option value="peace">Peace & Serenity (Shanti / Nature)</option>
+                                <option value="culture" selected>Culture & Heritage (Sanskriti)</option>
+                                <option value="adventure">Adventure & Thrill (Excitement)</option>
+                                <option value="family">Family & Leisure (Parivaar)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-running"></i> Travel Pace</label>
+                            <select id="paceInput">
+                                <option value="relaxed">Relaxed (Slow, Mindful Travel)</option>
+                                <option value="moderate" selected>Moderate (Balanced Sightseeing & Rest)</option>
+                                <option value="active">Active (Maximum Explorations)</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-secondary btn-block" onclick="generateSmartPlan()">
+                            <i class="fas fa-magic"></i> Generate Smart Plan
+                        </button>
+                    </div>
+
+                    <div class="planner-output" id="plannerOutput">
+                        <div class="planner-placeholder">
+                            <div class="icon"><i class="fas fa-compass"></i></div>
+                            <h3>Ready to Plan Your Dream Journey?</h3>
+                            <p>Fill in your desired destination, duration, and budget on the left to generate an authentic day-wise itinerary, budget distribution graph, and sustainability tips.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. DESTINATIONS SECTION -->
+        <section id="destinations" class="page-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="tagline">Explore Bharat</span>
+                    <h2>🌍 Popular & Hidden Destinations</h2>
+                    <p>Discover hand-picked cultural gems, pristine Himalayan villages, and living river islands away from commercial crowds.</p>
+                </div>
+
+                <div class="search-filter-bar">
+                    <div class="filter-pills" id="destFilterPills">
+                        <div class="filter-pill active" data-filter="all" onclick="filterDestinations('all', this)">All Destinations</div>
+                        <div class="filter-pill" data-filter="peace" onclick="filterDestinations('peace', this)">Peace & Nature</div>
+                        <div class="filter-pill" data-filter="culture" onclick="filterDestinations('culture', this)">Heritage & Culture</div>
+                        <div class="filter-pill" data-filter="adventure" onclick="filterDestinations('adventure', this)">Adventure & Trails</div>
+                    </div>
+
+                    <div class="search-input-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="destSearchInput" placeholder="Search by destination or state..." oninput="searchDestinations(this.value)">
+                    </div>
+                </div>
+
+                <div class="card-grid" id="destinationsGrid">
+                    <!-- Populated dynamically via js/data.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. LEAFLET INTERACTIVE MAP SECTION -->
+        <section id="map" class="page-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="tagline">Geographic Explorer</span>
+                    <h2>🗺️ Featured Dream Map of India</h2>
+                    <p>Interact with our live map of India to explore verified destinations, authentic homestays, and cultural centers with real geographic coordinates.</p>
+                </div>
+
+                <div class="map-section-wrapper">
+                    <div class="map-controls">
+                        <div class="filter-pills">
+                            <div class="filter-pill active" onclick="filterMap('all', this)">All Pins</div>
+                            <div class="filter-pill" onclick="filterMap('culture', this)">Culture & Heritage</div>
+                            <div class="filter-pill" onclick="filterMap('peace', this)">Peace & Himalayan</div>
+                            <div class="filter-pill" onclick="filterMap('adventure', this)">Adventure</div>
+                            <div class="filter-pill" onclick="filterMap('nature', this)">Eco-Villages</div>
+                        </div>
+                        <div style="font-size: 0.88rem; color: var(--text-muted);">
+                            <i class="fas fa-info-circle"></i> Click any pin to view details or start planning
+                        </div>
+                    </div>
+
+                    <div id="leafletMap"></div>
+
+                    <div class="map-legend-bar">
+                        <div class="map-legend-item">
+                            <div class="map-pin-badge pin-culture"></div>
+                            <span>Cultural & UNESCO Sites</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <div class="map-pin-badge pin-peace"></div>
+                            <span>Peaceful & Himalayan Retreats</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <div class="map-pin-badge pin-adventure"></div>
+                            <span>Adventure & Mountain High-Desert</span>
+                        </div>
+                        <div class="map-legend-item">
+                            <div class="map-pin-badge pin-nature"></div>
+                            <span>Living Root Bridges & Nature</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. VERIFIED HOMESTAYS / LISTINGS -->
+        <section id="listings" class="page-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="tagline">Atithi Devo Bhava</span>
+                    <h2>🏡 Trusted & Verified Homestays</h2>
+                    <p>Stay with local host families in traditional Kath-Kuni wood cottages, heritage havelis, and bamboo stilt houses. 100% verified for safety and hygiene.</p>
+                </div>
+
+                <div class="card-grid" id="listingsGrid">
+                    <!-- Populated dynamically via js/data.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. LOCAL EXPERIENCE HUB / MARKETPLACE -->
+        <section id="marketplace" class="page-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="tagline">Direct Artisan Support</span>
+                    <h2>🛍️ Local Experience & Artisan Hub</h2>
+                    <p>Learn directly from master artisans. Book hands-on workshops in Madhubani painting, Blue Pottery, and traditional handlooms with no middleman commissions.</p>
+                </div>
+
+                <div class="card-grid" id="marketplaceGrid">
+                    <!-- Populated dynamically via js/data.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. COMMUNITY VOICES -->
+        <section id="community" class="page-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="tagline">Grassroots Voices</span>
+                    <h2>🤝 Local Culture & Community Connection</h2>
+                    <p>Meet the real custodians of Indian culture: village elders, organic farmers, and folk musicians welcoming you into their ancestral homes.</p>
+                </div>
+
+                <div class="community-grid" id="communityGrid">
+                    <!-- Populated dynamically via js/data.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. CERTIFIED GUIDES -->
+        <section id="guides" class="page-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="tagline">Authentic Storytellers</span>
+                    <h2>🧑‍🏫 Certified Local Guides</h2>
+                    <p>Connect with licensed local historians and eco-specialists who narrate authentic folklore, ensure traveler safety, and reveal hidden passages.</p>
+                </div>
+
+                <div class="card-grid" id="guidesGrid">
+                    <!-- Populated dynamically via js/data.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. CULTURE & RESPECTFUL ETIQUETTE -->
+        <section id="culture" class="page-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="tagline">Cultural Etiquette</span>
+                    <h2>🎭 Respectful Cultural Engagement</h2>
+                    <p>Understanding traditional customs, temple protocols, and dining etiquette ensures a deeply enriching and respectful experience for both traveler and host community.</p>
+                </div>
+
+                <div class="accordion-wrapper">
+                    <div class="accordion-item active">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-gopuram"></i> Sacred Sites & Temple Etiquette</span>
+                            <span class="icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Always remove footwear outside before entering temple sanctums, monasteries, and traditional homes.</li>
+                                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Dress modestly covering shoulders and knees; carrying a scarf or stole is appreciated at religious sites.</li>
+                                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Walk clockwise (Pradakshina) around sanctums, Buddhist stupas, and Mani stones.</li>
+                                <li><i class="fas fa-times-circle" style="color:var(--accent-red);"></i> Never photograph deity idols or prayer ceremonies where signs prohibit photography.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-utensils"></i> Dining Customs & Food Sharing</span>
+                            <span class="icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Eating with clean hands (predominantly the right hand) is traditional and celebrated across India.</li>
+                                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Accept Prasad (sacred food offering) with both hands as a mark of humility and gratitude.</li>
+                                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Feel free to inquire about spice levels in advance; host families happily accommodate mild preferences.</li>
+                                <li><i class="fas fa-times-circle" style="color:var(--accent-red);"></i> Avoid wasting food on your plate, as food (Annadata) is revered as sacred in Indian culture.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-check-double"></i> Do's for Sustainable Travelers</span>
+                            <span class="icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Greet locals with "Namaste" or regional greetings (Jhuley in Spiti/Ladakh, Khamma Ghani in Rajasthan).</li>
+                                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Always ask politely before taking portrait photographs of village elders, women, or artisans.</li>
+                                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Purchase handicrafts directly from the artisan or verified village cooperatives at fair prices.</li>
+                                <li><i class="fas fa-check-circle" style="color:var(--secondary);"></i> Carry a refillable steel water bottle and cloth shopping bag to prevent single-use plastic waste in hill stations.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span><i class="fas fa-ban"></i> Don'ts for Responsible Travelers</span>
+                            <span class="icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <ul>
+                                <li><i class="fas fa-times-circle" style="color:var(--accent-red);"></i> Do not litter or leave non-biodegradable trash on mountain trails, riverbanks, or desert dunes.</li>
+                                <li><i class="fas fa-times-circle" style="color:var(--accent-red);"></i> Do not disrespect local beliefs, sacred trees, prayer flags, or village customs.</li>
+                                <li><i class="fas fa-times-circle" style="color:var(--accent-red);"></i> Avoid aggressive bargaining that devalues days of intense handmade artisan labor.</li>
+                                <li><i class="fas fa-times-circle" style="color:var(--accent-red);"></i> Do not disturb local wildlife, feed wild monkeys, or play loud portable speakers in quiet village ecosystems.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. REVIEWS & TESTIMONIALS -->
+        <section id="reviews" class="page-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="tagline">Real Experiences</span>
+                    <h2>⭐ Tourist Reviews & Community Stories</h2>
+                    <p>Read authentic testimonials from fellow travelers who experienced offbeat India responsibly.</p>
+                </div>
+
+                <div class="reviews-summary-bar">
+                    <div>
+                        <h3 style="font-size: 1.6rem;"><i class="fas fa-star" style="color:#f59e0b;"></i> 4.9 out of 5 Stars</h3>
+                        <p>Based on 500+ verified cultural homestay and guide engagements across India.</p>
+                    </div>
+                    <button class="btn btn-secondary" onclick="openAddReviewModal()">
+                        <i class="fas fa-pen-alt"></i> Share Your Experience
+                    </button>
+                </div>
+
+                <div id="reviewsList">
+                    <!-- Populated dynamically via js/data.js and localStorage -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. LOGIN & REGISTRATION SECTION -->
+        <section id="authPage" class="page-section">
+            <div class="container">
+                <div class="auth-section-wrapper">
+                    <!-- Left Hero Panel -->
+                    <div class="auth-banner-panel">
+                        <div class="auth-banner-content">
+                            <span class="auth-badge"><i class="fas fa-shield-halved"></i> Sustainable Travel Network</span>
+                            <h2>अतिथि देवो भव | Atithi Devo Bhava</h2>
+                            <p>Connect with a conscious community of travelers, authentic village homestay hosts, and traditional master artisans.</p>
+                            
+                            <div class="auth-perks-list">
+                                <div class="perk-item">
+                                    <div class="perk-icon"><i class="fas fa-bolt"></i></div>
+                                    <div>
+                                        <h4>Smart AI Itinerary Saving</h4>
+                                        <p>Save, customize, and export your personal travel plans anytime.</p>
+                                    </div>
+                                </div>
+                                <div class="perk-item">
+                                    <div class="perk-icon"><i class="fas fa-handshake"></i></div>
+                                    <div>
+                                        <h4>Direct Host & Artisan Contact</h4>
+                                        <p>Book homestays and folk art workshops with 0% middleman fees.</p>
+                                    </div>
+                                </div>
+                                <div class="perk-item">
+                                    <div class="perk-icon"><i class="fas fa-medal"></i></div>
+                                    <div>
+                                        <h4>Verified Community Reviews</h4>
+                                        <p>Share travel stories and build trust for offbeat destinations.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="auth-quote">
+                                <p>"Staying in a Kath-Kuni homestay in Kinnaur changed how I see travel forever. Dream Destination puts power back into local hands."</p>
+                                <span>— Dr. Priya Menon, Verified Traveler</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Form Card -->
+                    <div class="auth-card-panel">
+                        <div class="auth-card-inner">
+                            <!-- Switcher Tabs -->
+                            <div class="auth-tab-nav">
+                                <button class="auth-tab-btn active" id="authTabLogin" onclick="switchAuthTab('login')">
+                                    <i class="fas fa-sign-in-alt"></i> Sign In
+                                </button>
+                                <button class="auth-tab-btn" id="authTabRegister" onclick="switchAuthTab('register')">
+                                    <i class="fas fa-user-plus"></i> Create Account
+                                </button>
+                            </div>
+
+                            <!-- 1-Click Demo Login for Evaluator -->
+                            <div class="demo-login-box">
+                                <div class="demo-header">
+                                    <span><i class="fas fa-graduation-cap"></i> Academic Viva / Demo Mode</span>
+                                </div>
+                                <p>Click to test instantly without filling forms:</p>
+                                <div class="demo-btn-group">
+                                    <button type="button" class="btn btn-demo-quick" onclick="quickDemoLogin('Evaluator')">
+                                        <i class="fas fa-user-check"></i> 1-Click Login (Evaluator)
+                                    </button>
+                                    <button type="button" class="btn btn-demo-quick host-btn" onclick="quickDemoLogin('Host')">
+                                        <i class="fas fa-home"></i> Demo Host
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="auth-divider">
+                                <span>OR SIGN IN WITH CREDENTIALS</span>
+                            </div>
+
+                            <!-- Login Form -->
+                            <div id="loginFormWrapper">
+                                <form id="loginForm" onsubmit="handleLogin(event)">
+                                    <div class="form-group">
+                                        <label><i class="fas fa-envelope"></i> Email or Username</label>
+                                        <input type="email" id="loginEmail" required placeholder="e.g. traveler@dreamdestination.in">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><i class="fas fa-lock"></i> Password</label>
+                                        <div class="password-input-wrap">
+                                            <input type="password" id="loginPassword" required placeholder="Enter your password">
+                                            <i class="fas fa-eye password-toggle-icon" onclick="togglePasswordVisibility('loginPassword', this)"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="auth-options-row">
+                                        <label class="remember-me-checkbox">
+                                            <input type="checkbox" checked>
+                                            <span>Remember me</span>
+                                        </label>
+                                        <a href="#" class="forgot-link" onclick="showToast('Password reset link sent to registered email (Demo simulation).', 'info'); return false;">Forgot Password?</a>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 1.25rem;">
+                                        <i class="fas fa-sign-in-alt"></i> Login to Dream Destination
+                                    </button>
+                                </form>
+                            </div>
+
+                            <!-- Register Form -->
+                            <div id="registerFormWrapper" style="display: none;">
+                                <form id="registerForm" onsubmit="handleRegister(event)">
+                                    <div class="form-group">
+                                        <label><i class="fas fa-user"></i> Full Name</label>
+                                        <input type="text" id="regName" required placeholder="e.g. Aryan Patel">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><i class="fas fa-envelope"></i> Email Address</label>
+                                        <input type="email" id="regEmail" required placeholder="e.g. aryan@example.com">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><i class="fas fa-phone"></i> Mobile / WhatsApp (Optional)</label>
+                                        <input type="tel" id="regPhone" placeholder="+91 98765 43210">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><i class="fas fa-user-tag"></i> Join As</label>
+                                        <select id="regRole">
+                                            <option value="Traveler (Yatri)" selected>Traveler (Yatri) - Explore & Plan Trips</option>
+                                            <option value="Homestay Host (Mezbaan)">Homestay Host (Mezbaan) - List My Stay</option>
+                                            <option value="Artisan / Guide (Karigar)">Artisan / Certified Guide (Karigar)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><i class="fas fa-lock"></i> Password</label>
+                                        <div class="password-input-wrap">
+                                            <input type="password" id="regPassword" required placeholder="Create a secure password">
+                                            <i class="fas fa-eye password-toggle-icon" onclick="togglePasswordVisibility('regPassword', this)"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="terms-agree-box">
+                                        <input type="checkbox" id="regPledge" required checked>
+                                        <label for="regPledge">I agree to follow the <strong>Responsible Traveler Charter</strong>: zero plastic waste and respect for local traditions.</label>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-secondary btn-block btn-lg" style="margin-top: 1.25rem;">
+                                        <i class="fas fa-user-check"></i> Create Free Account
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= MODAL OVERLAY ================= -->
+    <div class="modal-overlay" id="modalOverlay" onclick="if(event.target === this) closeModal()">
+        <div class="modal-box" id="modalBox">
+            <!-- Dynamic modal content loaded via JavaScript -->
+        </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="color:#fff; margin-bottom: 1rem;">
+                        <i class="fas fa-mountain-sun"></i> Dream<span>Destination</span>
+                    </div>
+                    <p>A B.Tech Computer Science & Engineering academic mini-project dedicated to smart, safe, and sustainable tourism in India. Built with modern web technologies, OpenStreetMap integration, and community-first principles.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Quick Navigation</h3>
+                    <ul>
+                        <li><a href="#planner" onclick="showPage('planner')">Smart Planner</a></li>
+                        <li><a href="#destinations" onclick="showPage('destinations')">Destinations</a></li>
+                        <li><a href="#map" onclick="showPage('map')">Interactive Map</a></li>
+                        <li><a href="#listings" onclick="showPage('listings')">Verified Homestays</a></li>
+                        <li><a href="#marketplace" onclick="showPage('marketplace')">Artisan Hub</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Academic Info</h3>
+                    <p><strong>Course:</strong> B.Tech CSE (Year 2)</p>
+                    <p><strong>Domain:</strong> Web Development & HCI</p>
+                    <p><strong>Theme:</strong> Sustainable Tourism (SDG 8 & 12)</p>
+                    <p><strong>Stack:</strong> HTML5, CSS3, ES6 JavaScript, Leaflet.js, LocalStorage</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Stay Connected</h3>
+                    <p>Subscribe for updates on offbeat Indian destinations and community workshops:</p>
+                    <div style="margin-top: 0.75rem;">
+                        <input type="email" id="newsletterEmail" placeholder="Enter your email" style="width: 100%; padding: 0.6rem 0.8rem; border-radius: 6px; border: none; margin-bottom: 0.5rem; font-size: 0.88rem;">
+                        <button class="btn btn-secondary btn-sm btn-block" onclick="showToast('Thank you for subscribing to Dream Destination updates!', 'success')">
+                            Subscribe 📬
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>✨ Promoting Smart, Safe & Sustainable Tourism across Bharat 🇮🇳 | Atithi Devo Bhava ✨</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">© 2026 Dream Destination. Designed & Engineered for B.Tech CSE Mini Project Evaluation.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT LIBRARIES & APP MODULES ================= -->
+    <!-- Leaflet.js Interactive Map Engine -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Structured Mock Data -->
+    <script src="js/data.js"></script>
+    
+    <!-- Application Logic & State Handlers -->
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
